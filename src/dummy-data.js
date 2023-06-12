@@ -52,6 +52,6 @@ export const DUMMY_DATA = [
       "size": "small",
       "breed": "Springer Spaniel",
       "traits": ["Friendly", "Great around other dogs"],
-      "photoUrl": "https://images.unsplash.com/photo-1583511655826-05700d52f4d9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80"
+      "photoUrl": "https://images.unsplash.com/photo-1515597849219-88a19d5f13f9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80"
     }   
   ]

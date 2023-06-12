@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import PuppyCard from "../features/puppy-comps/PuppyCard";
 import Input from '../components/ui/form/Input';
 import classes from './PuppyList.module.scss'
@@ -6,8 +6,14 @@ import { DUMMY_DATA } from "../dummy-data";
 
 const PuppyListPage = () => {
 
-    // const [query, setQuery] = useState('');
-    const [filteredData, setFilteredData] = useState(DUMMY_DATA)
+    const [query, setQuery] = useState('');
+    const [filteredData, setFilteredData] = useState(DUMMY_DATA);
+    // const [filteredGender, setFilterGender] = useState([]);
+
+    useEffect(() => {
+        setFilteredData(DUMMY_DATA.filter(data => data.name.toLowerCase().includes(query)))
+
+    }, [query])
 
    
    const ages = DUMMY_DATA.map( data => data.age);
@@ -16,44 +22,50 @@ const PuppyListPage = () => {
    const breedArr = DUMMY_DATA.map(data => data.breed).filter((breed, i, arr) => arr.indexOf(breed) === i );
 
    const reset = () => setFilteredData(DUMMY_DATA);
-   const dataFilter = (keys, queryValue) => setFilteredData(DUMMY_DATA.filter(data => keys.some(key => data[key].toString().toLowerCase() === queryValue)));
 
 
    const genderFilterHandler = (e) => {
-        if (e.target.value === 'all') {
-            reset();
-        }else{
-            dataFilter(['gender'], e.target.value)
+        const queried = [...DUMMY_DATA.filter(data => data.name.toLowerCase().includes(query))];
+
+        if (e.target.value === 'all' && query === '') return reset();
+
+        if (query === '') {
+            return setFilteredData(DUMMY_DATA.filter(data => data.gender.toLowerCase() === e.target.value));
         }
+
+        if (e.target.value === 'all' && query ) return setFilteredData(queried)
+        
+        return setFilteredData(queried.filter(data => data.gender === e.target.value))
+       
     }
 
    const ageFilterHandler = (e) => {
-    if (e.target.value === '') {
-        reset();
-    }else{
-        dataFilter(['age'], e.target.value);
-    }
+        if (e.target.value === '' && query === '') return reset();
+
+        if (query === '') {
+            return setFilteredData(DUMMY_DATA.filter(data => data.age === +e.target.value));
+        }
    }
 
    const breedFilterHandler = (e) => {
-    console.log(e.target.value)
-    if (e.target.value === 'all') {
-        reset();
-    }else{
-        dataFilter(['breed'], e.target.value);
-    }
+        if (e.target.value === 'all' && query === '') return reset();
+
+        if (query === '') {
+            return setFilteredData(DUMMY_DATA.filter(data => data.breed.toLowerCase() === e.target.value));
+        }
    }
 
    const searchHandler = (e) => {
-    if (e.target.value === '') {
-        reset();
-    }else{
-        dataFilter(['gender', 'name', 'age', 'breed'], e.target.value)
-    }
+    // if (e.target.value === '') {
+    //     reset();
+    // }else{
+    //     dataFilter(['gender', 'name', 'age', 'breed'], e.target.value)
+    // }
+    if (e.target.value === '') reset();
+    setQuery(e.target.value)
    }
 
-//    console.log('query', breedArr)
-
+   console.log('query', query, filteredData)
 
     return ( 
         <div className="app-container">
