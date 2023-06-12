@@ -1,0 +1,14 @@
+@use '../../../styles/settings.scss' as colors;
+
+.field{
+    input{
+        border: 1px colors.$secondary solid;
+        padding: 0.5rem;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    &-select{
+        padding: 0.5rem;
+        box-sizing: border-box;
+    }
+}
