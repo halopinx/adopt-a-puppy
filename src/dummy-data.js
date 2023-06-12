@@ -45,7 +45,7 @@ export const DUMMY_DATA = [
     },
     {
       "name": "Paris",
-      "age": 1,
+      "age": 2,
       "gender": "female",
       "isVaccinated": false,
       "isNeutered": true,

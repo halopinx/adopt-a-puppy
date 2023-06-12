@@ -6,13 +6,13 @@ import { DUMMY_DATA } from "../dummy-data";
 
 const PuppyListPage = () => {
 
+    // let queried = [];
     const [query, setQuery] = useState('');
     const [filteredData, setFilteredData] = useState(DUMMY_DATA);
-    // const [filteredGender, setFilterGender] = useState([]);
+    // const [queried, setQueried] = useState([]);
 
     useEffect(() => {
         setFilteredData(DUMMY_DATA.filter(data => data.name.toLowerCase().includes(query)))
-
     }, [query])
 
    
@@ -23,28 +23,24 @@ const PuppyListPage = () => {
 
    const reset = () => setFilteredData(DUMMY_DATA);
 
-
-   const genderFilterHandler = (e) => {
-        const queried = [...DUMMY_DATA.filter(data => data.name.toLowerCase().includes(query))];
-
-        if (e.target.value === 'all' && query === '') return reset();
-
-        if (query === '') {
-            return setFilteredData(DUMMY_DATA.filter(data => data.gender.toLowerCase() === e.target.value));
-        }
-
-        if (e.target.value === 'all' && query ) return setFilteredData(queried)
-        
-        return setFilteredData(queried.filter(data => data.gender === e.target.value))
-       
+    const searchHandler = (e) => {
+        if (e.target.value === '') reset();
+        setQuery(e.target.value)
     }
 
    const ageFilterHandler = (e) => {
+        const queried = [...DUMMY_DATA.filter(data => data.name.toLowerCase().includes(query))];
+        console.log('queried age', queried)
+
         if (e.target.value === '' && query === '') return reset();
 
         if (query === '') {
             return setFilteredData(DUMMY_DATA.filter(data => data.age === +e.target.value));
         }
+
+        if (e.target.value === '' && query) return setFilteredData(queried)
+
+        return setFilteredData(queried.filter(data => data.age === +e.target.value))
    }
 
    const breedFilterHandler = (e) => {
@@ -55,17 +51,24 @@ const PuppyListPage = () => {
         }
    }
 
-   const searchHandler = (e) => {
-    // if (e.target.value === '') {
-    //     reset();
-    // }else{
-    //     dataFilter(['gender', 'name', 'age', 'breed'], e.target.value)
-    // }
-    if (e.target.value === '') reset();
-    setQuery(e.target.value)
-   }
+
+    const genderFilterHandler = (e) => {
+        const queried = [...DUMMY_DATA.filter(data => data.name.toLowerCase().includes(query))];
+        if (e.target.value === 'all' && query === '') return reset();
+
+        if (query === '') {
+        return setFilteredData(DUMMY_DATA.filter(data => data.gender.toLowerCase() === e.target.value));
+        }
+
+        if (e.target.value === 'all' && query ) return setFilteredData(queried)
+
+        return setFilteredData(queried.filter(data => data.gender === e.target.value))
+    }
+
+
 
    console.log('query', query, filteredData)
+//    console.log('queried', queried)
 
     return ( 
         <div className="app-container">
