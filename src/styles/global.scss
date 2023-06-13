@@ -22,6 +22,9 @@ button{
 input, select {
     outline: none;
 }
+::placeholder{
+    color: #ccc;
+}
 .app{
    &-main{
     padding: 60px 0;    

@@ -31,7 +31,7 @@ const AdoptForm = () => {
                 <FormikInput label='Firstname*' id='firstname' type='text' name='firstName' />
                 <FormikInput label='Lastname*' id='lastname' type='text' name='lastName' />
                 <FormikInput label='Email Address*' id='email' type='email' name='email' />
-                <FormikInput label='Phone Number*' id='phone' type='tel' name='phone' />
+                <FormikInput label='Phone Number*' id='phone' type='tel' name='phone' placeholder='11-digit' />
                 <Button variant='button' type="submit" disabled={isSubmitting} className={classes.btn}>{isSubmitting ? 'Submitting...' : 'Ready to adopt'}</Button>
             </div>
           </Form>

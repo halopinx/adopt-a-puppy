@@ -9,6 +9,9 @@
     }
     &-input {
         flex: 1;
+        input {
+             margin-bottom: 0;
+        }
     }
 }
 

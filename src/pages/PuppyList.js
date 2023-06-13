@@ -39,7 +39,6 @@ const PuppyListPage = () => {
             data.breed.toLowerCase().includes(query) ||
             data.gender.includes(query)
        )];
-        console.log('queried age', queried)
 
         if (e.target.value === '' && query === '') return reset();
         
@@ -95,24 +94,20 @@ const PuppyListPage = () => {
         return setFilteredData(queried.filter(data => data.gender === e.target.value))
     }
 
-
-
-   console.log('query', query, filteredData)
-//    console.log('queried', queried)
-
     return ( 
         <div className="app-container">
              <div className={classes.wrapper}>
-                <aside>
+                <aside className={classes.filters}>
+                        <h3>Filter puppy</h3>
                         <Input type="search" placeholder="Search puppy..." onChange={searchHandler}/>
-                        <Input type='number' min={minAge} max={maxAge} onChange={ageFilterHandler} placeholder='All ages'/>
-                        <Input variant='select' name='breed' onChange={breedFilterHandler}>
+                        <Input type='number' min={minAge} max={maxAge} onChange={ageFilterHandler} placeholder='All ages' label='Age' />
+                        <Input variant='select' name='breed' onChange={breedFilterHandler} label='Breed'>
                             <option value="all">All Breed</option>
                             {
                                 breedArr.map((breed, index) => <option key={index} value={breed.toLowerCase()}>{breed}</option>)
                             }
                         </Input>
-                        <Input variant='select' name='gender' onChange={genderFilterHandler}>
+                        <Input variant='select' name='gender' onChange={genderFilterHandler} label='Gender'>
                             <option value="all">All Gender</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
