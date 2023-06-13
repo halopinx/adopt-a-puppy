@@ -1,13 +1,13 @@
 import { useContext } from 'react';
-import { useParams } from 'react-router'
+import { useParams, useNavigate } from 'react-router'
 import PuppyAside from "../features/puppy-comps/PuppyAside";
 import PuppyInfo from "../features/puppy-comps/PuppyInfo";
-import classes from './PuppyProfile.module.scss'
 import AdoptForm from "../features/adopt-form/AdoptForm";
 import { DUMMY_DATA } from "../dummy-data";
 import FormContext from '../store/form-context';
 import imgPlaceholder from '../assets/images/placeholder.jpg'
 import Modal from '../components/ui/Modal';
+import classes from './PuppyProfile.module.scss'
 
 
 const PuppyProfilePage = () => {
@@ -20,10 +20,13 @@ const PuppyProfilePage = () => {
     const { name, age, gender, photoUrl, size, isVaccinated, isNeutered, traits } = [...fetchPuppyById][0];
     const traitsList = traits.join(', ');
 
-    console.log(isSubmitted)
+    const navigate = useNavigate();
 
     const modalCloseHandler = () => {
         setIsSubmitted(false)
+        setTimeout( () => {
+            navigate('/');
+        }, 500)
     }
 
     return (  
