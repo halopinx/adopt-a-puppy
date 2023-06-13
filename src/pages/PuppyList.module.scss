@@ -1,3 +1,5 @@
+@use '../styles/settings.scss' as colors;
+
 .wrapper{
     display: grid;
     grid-template-columns: 1fr 3fr;
@@ -32,4 +34,9 @@
          }
        }
     }
+}
+.reset{
+    float: right;
+    font-size: 0.75rem;
+    background-color: colors.$secondary;
 }
