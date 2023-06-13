@@ -7,6 +7,9 @@ body{
 a{
     text-decoration: none;
 }
+p{
+    line-height: 1.35;
+}
 h1, h2, h3{
     @extend .font-semibold; 
 }

@@ -1,5 +1,6 @@
 import { DUMMY_DATA } from '../dummy-data';
 import PuppyCard from '../features/puppy-comps/PuppyCard';
+import Button from '../components/ui/Button';
 import classes from './Home.module.scss'
 
 const HomePage = () => {
@@ -7,22 +8,23 @@ const HomePage = () => {
         <div className='app-container'>
             <h1 className={classes.heading}>Featured Puppies to adapt</h1>
             <div className={classes.wrapper}>
-                    {DUMMY_DATA.slice(0,4).map(data => {
-                        const link = `/${data.name}-${data.id}`.toLowerCase();
-                        return (
-                            <PuppyCard 
-                                key={data.id} 
-                                details={{
-                                    name: data.name, 
-                                    age: data.age,
-                                    gender: data.gender,
-                                    image: data.photoUrl, 
-                                    link: link
-                                }}
-                                />
-                        )
-                    })}
+                {DUMMY_DATA.slice(0,4).map(data => {
+                    const link = `/${data.name}-${data.id}`.toLowerCase();
+                    return (
+                        <PuppyCard 
+                            key={data.id} 
+                            details={{
+                                name: data.name, 
+                                age: data.age,
+                                gender: data.gender,
+                                image: data.photoUrl, 
+                                link: link
+                            }}
+                        />
+                    )
+                })}
             </div>
+            <div className={classes.action}><Button link='/find-your-puppy'>See more puppies</Button></div>
         </div>
     );
 }

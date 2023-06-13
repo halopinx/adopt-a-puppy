@@ -7,10 +7,11 @@ import AdoptForm from "../features/adopt-form/AdoptForm";
 import { DUMMY_DATA } from "../dummy-data";
 import FormContext from '../store/form-context';
 import imgPlaceholder from '../assets/images/placeholder.jpg'
+import Modal from '../components/ui/Modal';
 
 
 const PuppyProfilePage = () => {
-    const { isSubmitted } = useContext(FormContext)
+    const { isSubmitted, setIsSubmitted } = useContext(FormContext)
     const router = useParams()
     const puppyId = router.id.split('-')[1]
 
@@ -20,6 +21,10 @@ const PuppyProfilePage = () => {
     const traitsList = traits.join(', ');
 
     console.log(isSubmitted)
+
+    const modalCloseHandler = () => {
+        setIsSubmitted(false)
+    }
 
     return (  
         <div className="app-container">
@@ -33,13 +38,19 @@ const PuppyProfilePage = () => {
                         <PuppyInfo heading='Vaccination records' info={isVaccinated ? 'Yes' : 'No'} />
                         <PuppyInfo heading='spaying/neutering' info={isNeutered ? 'Yes' : 'No'} />
                     </div>
-                    {isSubmitted && <p>YAY!</p>}
-                     <div className={classes.action}>
+                    {isSubmitted 
+                        && <Modal 
+                                title={`Thank you for making ${name} happy!`} 
+                                message='Please expect a call from our representative regarding documents and processes. Or you may drop off in our shelter and present your identication for verification.' 
+                                onClose={modalCloseHandler}
+                           />
+                    }
+                    <div className={classes.action}>
                         <h3>Interested to adopt {name}?</h3>
                         <p>Please fill out the form below.</p>
                         <AdoptForm />
-                     </div>
-                   
+                    </div>
+                
                 </section>
             </div>
         </div>

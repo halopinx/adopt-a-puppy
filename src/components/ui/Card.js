@@ -1,9 +1,9 @@
 import classes from './Card.module.scss'
+import cn from 'classnames';
 
 const Card = ({ children, className }) => {
-    const styles = className ? `${classes.card} ${className}` : classes.card
     return (
-        <div className={styles}>
+        <div className={cn(classes.card, className)}>
             {children}
         </div>
     );
