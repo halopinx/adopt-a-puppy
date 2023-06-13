@@ -15,22 +15,20 @@ const initialState = {
 }
 
 const queryReducer = (state, action) => {
-    if (action.type === 'SEARCH') {
-        return { ...state, queries: action.value.toLowerCase(), data: [...action.data]}
+    switch (action.type) {
+        case 'SEARCH': 
+            return { ...state, queries: action.value.toLowerCase(), data: [...action.data] }
+        case 'SEARCH_AGE':
+            return { ...state,  age: action.value, data: [...action.data] }
+        case 'SEARCH_BREED':
+            return { ...state,  breed: action.value.toLowerCase(), data: [...action.data] }
+        case 'SEARCH_GENDER':
+            return { ...state,  gender: action.value.toLowerCase(), data: [...action.data] }
+        case 'RESET':
+            return {...initialState}; 
+        default:
+            return state;
     }
-    if (action.type === 'SEARCH_AGE') {
-        return { ...state,  age: action.value, data: [...action.data] }
-    }
-    if (action.type === 'SEARCH_BREED') {
-        return { ...state,  breed: action.value.toLowerCase(), data: [...action.data] }
-    }
-    if (action.type === 'SEARCH_GENDER') {
-        return { ...state,  gender: action.value.toLowerCase(), data: [...action.data] }
-    }
-    if (action.type === 'RESET') {
-        return initialState;
-    }
-    return state;
 }
 
 const PuppyListPage = () => {
@@ -44,7 +42,6 @@ const PuppyListPage = () => {
             data.gender.toLowerCase() === target
         )
     }
-
    
    const ages = initialState.data.map( data => data.age);
    const minAge = Math.min(...ages);
@@ -52,61 +49,61 @@ const PuppyListPage = () => {
    const breedArr = initialState.data.map(data => data.breed).filter((breed, i, arr) => arr.indexOf(breed) === i );
 
    const searchHandler = (e) => {
-        dispatch({type: 'SEARCH', value: e.target.value, data: filterSearch(e.target.value)})
+        dispatch({ type: 'SEARCH', value: e.target.value, data: filterSearch(e.target.value) })
     }
 
    const ageFilterHandler = (e) => {
-        dispatch({type: 'SEARCH_AGE', value: e.target.value, data: filterSearch(e.target.value)})
+        dispatch({ type: 'SEARCH_AGE', value: e.target.value, data: filterSearch(e.target.value) })
    }
 
    const breedFilterHandler = (e) => {
-        dispatch({type: 'SEARCH_BREED', value: e.target.value, data: filterSearch(e.target.value)})
+        dispatch({ type: 'SEARCH_BREED', value: e.target.value, data: filterSearch(e.target.value) })
    }
 
-    const genderFilterHandler = (e) => {
-        dispatch({type: 'SEARCH_GENDER', value: e.target.value, data: filterSearch(e.target.value)})
-    }
+   const genderFilterHandler = (e) => {
+        dispatch({ type: 'SEARCH_GENDER', value: e.target.value, data: filterSearch(e.target.value) })
+   }
 
-    const resetFilterHandler = () => dispatch({ type: 'RESET' })
+   const resetFilterHandler = () => dispatch({ type: 'RESET' })
 
     return ( 
         <div className="app-container">
-             <div className={classes.wrapper}>
+                <div className={classes.wrapper}>
                 <aside className={classes.filters}>
-                        <h3>Filter puppy</h3>
-                        <Input type="search" placeholder="Search puppy..." onChange={searchHandler} value={queryState.queries}/>
-                        <Input type='number' min={minAge} max={maxAge} onChange={ageFilterHandler} placeholder='All ages' label='Age' value={queryState.age} />
-                        <Input variant='select' name='breed' onChange={breedFilterHandler} label='Breed' value={queryState.breed}>
-                            <option value="">All Breed</option>
-                            {
-                                breedArr.map((breed, index) => <option key={index} value={breed.toLowerCase()}>{breed}</option>)
-                            }
-                        </Input>
-                        <Input variant='select' name='gender' onChange={genderFilterHandler} label='Gender' value={queryState.gender}>
-                            <option value="">All Gender</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                        </Input>
-                        <Button variant='button' onClick={resetFilterHandler} className={classes.reset}>Clear Filters</Button>
+                    <h3>Filter puppy</h3>
+                    <Input type="search" placeholder="Search puppy..." onChange={searchHandler} value={queryState.queries}/>
+                    <Input type='number' min={minAge} max={maxAge} onChange={ageFilterHandler} placeholder='All ages' label='Age' value={queryState.age} />
+                    <Input variant='select' name='breed' onChange={breedFilterHandler} label='Breed' value={queryState.breed}>
+                        <option value="">All Breed</option>
+                        {
+                            breedArr.map((breed, index) => <option key={index} value={breed.toLowerCase()}>{breed}</option>)
+                        }
+                    </Input>
+                    <Input variant='select' name='gender' onChange={genderFilterHandler} label='Gender' value={queryState.gender}>
+                        <option value="">All Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </Input>
+                    <Button variant='button' onClick={resetFilterHandler} className={classes.reset}>Clear Filters</Button>
                 </aside>
                 <div className={classes.results}>
-                        {queryState.data.map(data => {
-                            const link = `/${data.name}-${data.id}`.toLowerCase();
-                            return (
-                                <PuppyCard 
-                                    key={data.id} 
-                                    details={{
-                                        name: data.name, 
-                                        age: data.age,
-                                        gender: data.gender,
-                                        image: data.photoUrl, 
-                                        link: link
-                                    }}
-                            />
-                            )
-                        })}
+                    {queryState.data.map(data => {
+                        const link = `/${data.name}-${data.id}`.toLowerCase();
+                        return (
+                            <PuppyCard 
+                                key={data.id} 
+                                details={{
+                                    name: data.name, 
+                                    age: data.age,
+                                    gender: data.gender,
+                                    image: data.photoUrl, 
+                                    link: link
+                                }}
+                        />
+                        )
+                    })}
                 </div>
-             </div>
+                </div>
         </div>
     );
 }
