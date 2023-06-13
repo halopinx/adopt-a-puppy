@@ -1,20 +1,16 @@
 import Card from "../../components/ui/Card";
 import PuppyInfo from "./PuppyInfo"
-import { DUMMY_DATA } from "../../dummy-data";
 import classes from './PuppyAside.module.scss'
 
-const PuppyAside = () => {
-
-    const TEST_IMG = DUMMY_DATA[0].photoUrl;
-
+const PuppyAside = ({ name, age, photoUrl, gender }) => {
     return ( 
         <aside>
             <Card className={classes['card-puppy']}>
-                <div className={classes['card-puppy--image']}><img src={TEST_IMG} alt="" /></div>
+                <div className={classes['card-puppy--image']}><img src={photoUrl} alt={name} /></div>
                 <div className={classes['card-puppy--details']}>
-                    <h1>Puppy Name</h1>  
-                    <PuppyInfo heading='Age' info='2' />
-                    <PuppyInfo heading='Gender' info='Female' />
+                    <h1>{name}</h1>  
+                    <PuppyInfo heading='Age' info={age} />
+                    <PuppyInfo heading='Gender' info={gender} />
                 </div>
             </Card>
         </aside>

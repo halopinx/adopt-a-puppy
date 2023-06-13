@@ -114,11 +114,11 @@ const PuppyListPage = () => {
                         </Input>
                 </aside>
                 <div className={classes.results}>
-                        {filteredData.map((data, index) => {
-                            const link = `/${data.name}-${index + 1}`.toLowerCase();
+                        {filteredData.map(data => {
+                            const link = `/${data.name}-${data.id}`.toLowerCase();
                             return (
                                 <PuppyCard 
-                                    key={index} 
+                                    key={data.id} 
                                     details={{
                                         name: data.name, 
                                         age: data.age,

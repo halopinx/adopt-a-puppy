@@ -16,10 +16,15 @@
     margin-bottom: 2rem;
     > div {
       border: 1px #ccc solid;
-      padding: 0.5em;
+      padding: 0;
       margin-bottom: -1px;
-      &:nth-child(odd) {
-        background-color: rgba(colors.$secondary, 0.15);
+      strong {
+        background-color: rgba(colors.$secondary, 0.09);
+        padding: 0.5rem;
+        border-right: 1px #ccc solid;
       }
     }
+}
+.action{
+  margin-top: 60px;
 }

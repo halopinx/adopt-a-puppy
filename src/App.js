@@ -5,6 +5,7 @@ import ErrorPage from "./pages/Error";
 import PuppyProfilePage from "./pages/PuppyProfile";
 import PuppyListPage from "./pages/PuppyList";
 
+
 const router = createBrowserRouter([
   { 
     path: '/', 
@@ -19,7 +20,7 @@ const router = createBrowserRouter([
 
 const App = () => {
   return (  
-    <RouterProvider router={router}/>
+      <RouterProvider router={router}/>
   );
 }
  

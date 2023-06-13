@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import FormContext from '../../store/form-context';
 import { Formik, Form } from 'formik';
 import Button from '../../components/ui/Button';
 import FormikInput from '../../components/ui/form/FormikInput';
@@ -6,6 +8,8 @@ import classes from './AdoptForm.module.scss'
 
 
 const AdoptForm = () => {
+    const { isSubmitted, setIsSubmitted } = useContext(FormContext);
+
     const initialValues = {
         firstName: '',
         lastName: '',
@@ -16,7 +20,12 @@ const AdoptForm = () => {
     const onSubmit = async (_, actions) => {
         await new Promise((resolve) => setTimeout(resolve, 1000))
         actions.resetForm();
+        await new Promise((resolve) => setTimeout(resolve, 1000))
+        setIsSubmitted(true);
     }
+
+    console.log('isSubmitted', isSubmitted)
+    
 
     return ( 
         <Formik
