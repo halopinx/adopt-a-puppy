@@ -65,10 +65,11 @@ const PuppyListPage = () => {
    }
 
    const resetFilterHandler = () => dispatch({ type: 'RESET' })
+   
 
     return ( 
         <div className="app-container">
-                <div className={classes.wrapper}>
+            <div className={classes.wrapper}>
                 <aside className={classes.filters}>
                     <h3>Filter puppy</h3>
                     <Input type="search" placeholder="Search puppy..." onChange={searchHandler} value={queryState.queries}/>
@@ -87,6 +88,7 @@ const PuppyListPage = () => {
                     <Button variant='button' onClick={resetFilterHandler} className={classes.reset}>Clear Filters</Button>
                 </aside>
                 <div className={classes.results}>
+                    { queryState.data.length === 0 && <p>Sorry, no match found!</p>}
                     {queryState.data.map(data => {
                         const link = `/${data.name}-${data.id}`.toLowerCase();
                         return (
@@ -103,7 +105,7 @@ const PuppyListPage = () => {
                         )
                     })}
                 </div>
-                </div>
+            </div>
         </div>
     );
 }

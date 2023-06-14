@@ -8,7 +8,7 @@ import classes from './AdoptForm.module.scss'
 
 
 const AdoptForm = () => {
-    const { isSubmitted, setIsSubmitted } = useContext(FormContext);
+    const { setIsSubmitted } = useContext(FormContext);
 
     const initialValues = {
         firstName: '',
@@ -23,9 +23,6 @@ const AdoptForm = () => {
         await new Promise((resolve) => setTimeout(resolve, 1000))
         setIsSubmitted(true);
     }
-
-    console.log('isSubmitted', isSubmitted)
-    
 
     return ( 
         <Formik
